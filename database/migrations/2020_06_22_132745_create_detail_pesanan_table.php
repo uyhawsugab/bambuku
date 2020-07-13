@@ -18,6 +18,7 @@ class CreateDetailPesananTable extends Migration
             $table->integer('id_pesanan')->unsigned();
             $table->integer('id_barang')->unsigned();
             $table->integer('jumlah')->unsigned();
+            $table->enum('status', ['Dipesan', 'Sedang diantar', 'Sudah diantar']);
             $table->timestamps();
 
             $table->foreign('id_pesanan')->references('id')->on('pesanan')->onDelete('cascade');
