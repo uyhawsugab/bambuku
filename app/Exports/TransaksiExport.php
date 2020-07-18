@@ -34,5 +34,20 @@ class TransaksiExport implements FromCollection, WithMapping, WithHeadings
     public function map($transaksi): array
     {
         $total = 0;
+
+        foreach($transaksi->pesanan->detail_pesanan as $detail) {
+            $total += $detail->barang->harga * $detail->jumlah;
+        }
+
+        return [
+            $transaksi->id,
+            $transaksi->id_pesanan,
+            $transaksi->pesanan->nama_pembeli,
+            $total,
+            $transaksi->bayar,
+            $transaksi->bayar - $total,
+            $transaksi->created_at,
+            $transaksi->updated_at
+        ];
     }
 }
