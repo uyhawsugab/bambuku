@@ -16,7 +16,7 @@ class AuthController extends Controller
             {
                 if (Hash::check($request->input('password'), $user->password)) {
                     $this->setSession($user);
-                    return redirect('/home')->with('sukses', 'Berhasil Login');
+                    return redirect('/index')->with('sukses', 'Berhasil Login');
                 }else {
                     return redirect()->back()->with('error', 'Username / Password Salah');
                 }
@@ -34,7 +34,7 @@ class AuthController extends Controller
 
     public function viewSignIn()
     {
-        return view('auth.singin');
+        return view('auth.login');
     }
 
     public function validateSignIn(Request $request)
@@ -50,6 +50,6 @@ class AuthController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('/auth/singin');
+        return redirect('/auth/signin');
     }
 }

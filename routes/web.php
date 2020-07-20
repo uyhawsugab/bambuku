@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('template');
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/signin', 'AuthController@viewSignIn');
+    Route::post('/signin', 'AuthController@validateSignIn');
+    Route::get('/logout', 'AuthController@logout');
+});
+
+Route::get('/index', 'DashboardController@index');
+Route::get('/', function(){
+    return redirect('/index');
 });
