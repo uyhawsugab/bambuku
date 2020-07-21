@@ -28,6 +28,7 @@ class AuthController extends Controller
     public function setSession($user)
     {
         Session::put('userId', $user->id);
+        Session::put('name', $user->name);
         Session::put('username',$user->username);
         Session::put('status', TRUE);
     }

@@ -13,13 +13,34 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/template', function(){
+    return view('template');
+});
+
 Route::group(['prefix' => 'auth'], function () {
     Route::get('/signin', 'AuthController@viewSignIn');
     Route::post('/signin', 'AuthController@validateSignIn');
     Route::get('/logout', 'AuthController@logout');
 });
 
-Route::get('/index', 'DashboardController@index');
-Route::get('/', function(){
+
+Route::group(['middleware' => ['check.signin']], function () {
+    
+    Route::get('/index', 'DashboardController@index');
+    Route::get('/', function(){
     return redirect('/index');
+    });
+
+
+    Route::group(['prefix' => 'barang'], function () {
+        Route::get('/index', 'BarangController@home');
+        Route::get('/new', 'BarangController@vAdd');
+        Route::post('/new', 'BarangController@validateAdd');
+        Route::get('/update/{id}', 'BarangController@vEdit');
+        Route::put('/update/{id}', 'BarangController@validateEdit');
+        Route::delete('/delete', 'BarangController@validateDelete');
+        Route::get('/json/{id}', 'BarangController@getWithJson');
+    });
+    
+
 });

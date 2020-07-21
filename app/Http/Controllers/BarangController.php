@@ -36,7 +36,7 @@ class BarangController extends Controller
     public function home()
     {
         $barang = Barang::with('jenisBarang')->get();
-        return view('barang.home', compact('barangs'));
+        return view('barang.index', compact('barang'));
     }
 
     public function vAdd()
@@ -49,7 +49,7 @@ class BarangController extends Controller
     {
         $barang =  Barang::where('id', $id)->with('jenisBarang')->first();
         $jenisBarang = JenisBarang::all();
-        return view('barang.edit'. compact('barangs', 'jenisBarangs'));
+        return view('barang.edit', compact('barang', 'jenisBarang'));
     }
 
     public function validateAdd(Request $request)
@@ -84,7 +84,7 @@ class BarangController extends Controller
         ]);
 
         $this->delete($request);
-        return redirect()->back()->with('sukses', 'Berhasil menghapus menu!');
+        return redirect()->back()->with('sukses', 'Berhasil menghapus barang!');
     }
 
     public function getWithJson($id)
