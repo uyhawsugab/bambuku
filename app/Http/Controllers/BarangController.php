@@ -42,7 +42,7 @@ class BarangController extends Controller
     public function vAdd()
     {
         $jenisBarang = JenisBarang::all();
-        return view('barang.new', compact('jenisBarangs'));
+        return view('barang.new', compact('jenisBarang'));
     }
 
     public function vEdit($id)
@@ -57,11 +57,11 @@ class BarangController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'harga' => 'required',
-            'jenis_barang' => 'requried',
+            'jenis_barang' => 'required',
         ]);
 
         $this->store($request);
-        return redirect('/barang/home')->with('sukses', 'Berhasil Menambah Barang');
+        return redirect('/barang/index')->with('sukses', 'Berhasil Menambah Barang');
     }
 
     public function validateEdit(Request $request, $id)
@@ -69,12 +69,12 @@ class BarangController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'harga' => 'required|numeric',
-            'jenis_menu' => 'required|numeric',
+            'jenis_barang' => 'required|numeric',
             'status' => 'required'
         ]);
 
         $this->edit($request, $id);
-        return redirect('/barang/home')->with('sukses', 'Berhasil mengubah data menu!');
+        return redirect('/barang/index')->with('sukses', 'Berhasil mengubah data menu!');
     }
 
     public function validateDelete(Request $request)

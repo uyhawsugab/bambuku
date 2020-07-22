@@ -11,7 +11,9 @@
             @endif
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Daftar Barang</h4>
+                    <div>
+                        <h4 class="card-title">Daftar Barang  <a href={{ url('barang/new') }} class="btn btn-success btn-sm" style="float: right; margin-bottom:10px">Tambah</a></h4>
+                    </div>
                     <div class="table-responsive">
                         <table id="multi_col_order"
                             class="table table-striped table-bordered display no-wrap" style="width:100%">
