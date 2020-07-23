@@ -41,14 +41,14 @@ class DetailPesananController extends Controller
 
     public function index($id_pesanan)
     {
-        $detail_pesanan = Pesanan::where('id', $id_pesanan)->with('detail_pesanan')->first();
-        return view('detail.index', compact('detail_pesanan' , 'id_pesanan'));
+        $detail_pesanans = Pesanan::where('id', $id_pesanan)->with('detail_pesanan')->first();
+        return view('detail.index', compact('detail_pesanans' , 'id_pesanan'));
     }
 
     public function vStore($id_pesanan)
     {
         $barang = Barang::where('status' , 'Tersedia')->get();
-        return view('detail.store', compact('barang', 'id_pesanan'));
+        return view('detail.new', compact('barang', 'id_pesanan'));
     }
 
     public function vEdit($id_pesanan, $id)

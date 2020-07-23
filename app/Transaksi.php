@@ -14,6 +14,6 @@ class Transaksi extends Model
     
     public function pesanan()
     {
-        $this->hasOne('App\Pesanan', 'id' , 'id_pesanan');
+        return $this->hasOne('App\Pesanan', 'id' , 'id_pesanan');
     }
 }

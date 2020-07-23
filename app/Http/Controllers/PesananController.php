@@ -48,13 +48,13 @@ class PesananController extends Controller
 
     public function index()
     {
-        $pesanans = Pesanan::with('user', 'detail_pesanan')->get();
+        $pesanans = Pesanan::with('detail_pesanan')->get();
         return view('pesanan.index', compact('pesanans'));
     }
 
     public function vStore()
     {
-        return view('pesanan.store');
+        return view('pesanan.new');
     }
 
     public function vEdit($id)
@@ -86,7 +86,7 @@ class PesananController extends Controller
     public function validateStore(Request $request)
     {
         $this->validate($request, [
-            'nama_pelanggan' => 'required',
+            'nama_pembeli' => 'required',
             'alamat' => 'required'
         ]);
 
@@ -97,7 +97,7 @@ class PesananController extends Controller
     public function validateEdit(Request $request , $id)
     {
         $this->validate($request, [
-            'nama_pelanggan' => 'required',
+            'nama_pembeli' => 'required',
             'alamat' => 'required',
             'status' => 'required'
         ]);

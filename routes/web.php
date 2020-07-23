@@ -43,4 +43,25 @@ Route::group(['middleware' => ['check.signin']], function () {
     });
     
 
+    Route::group(['prefix' => 'pesanan'], function () {
+        Route::get('/index', 'PesananController@index');
+        Route::get('/{id_pesanan}/detail', 'DetailPesananController@index')->name('detail.index');
+        Route::get('/total/{id}/', 'PesananController@getTotal');
+        Route::get('/download-report', 'PesananController@exportToExcel');
+        Route::get('/new', 'PesananController@vStore');
+        Route::post('/new', 'PesananController@validateStore');
+        Route::get('/update/{id}', 'PesananController@vEdit');
+        Route::put('/update/{id}', 'PesananController@validateEdit');
+        Route::delete('/delete','PesananController@validateDelete');
+        Route::get('/json/{id}', 'PesananController@getDataWithJSON');
+
+        Route::get('/{id_pesanan}/detail/new', 'DetailPesananController@vStore')->name('detail.vstore');
+        Route::post('/{id_pesanan}/detail/new', 'DetailPesananController@validateStore')->name('detail.store');
+        Route::post('/{id_pesanan}/detail/submit', 'DetailPesananController@massInsert')->name('detail.insert');
+        Route::get('/{id_pesanan}/detail/update/{id}', 'DetailPesananController@vEdit')->name('detail.vedit');
+        Route::put('/{id_pesanan}/detail/update/{id}', 'DetailPesananController@validateEdit')->name('detail.edit');
+        Route::delete('/detail/delete','DetailPesananController@validateDelete');
+        Route::get('/detail/json/{id}', 'DetailPesananController@getDataWithJSON');
+    });
+
 });
