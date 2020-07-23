@@ -174,6 +174,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i data-feather="settings" class="svg-icon"></i>
+                                
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -182,6 +183,22 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
+                        @if (Session::has('detail'))
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i data-feather="shopping-cart" class="svg-icon"></i>
+                                <span class="badge badge-primary notify-no rounded-circle">{{ count(Session::get('detail')) }}</span>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                               <form action="{{ route('detail.insert', $id_pesanan) }}" method="post">
+                                    {{ csrf_field() }}
+                                    <input type="submit" value="CheckOut" class="dropdown-item">
+                                </form>
+                            </div>
+                        </li>
+                        @endif
+                        
                         <li class="nav-item d-none d-md-block">
                             <a class="nav-link" href="javascript:void(0)">
                                 <div class="customize-input">

@@ -12,18 +12,18 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title">Daftar Pesanan  <a href={{ url('pesanan/new') }} class="btn btn-success btn-sm" style="float: right; margin-bottom:10px">Tambah</a></h4>
+                        <h4 class="card-title">Daftar Transaksi  <a href={{ url('pesanan/new') }} class="btn btn-success btn-sm" style="float: right; margin-bottom:10px">Tambah</a></h4>
                     </div>
                     <div class="table-responsive">
                         <table id="multi_col_order"
                             class="table table-striped table-bordered display no-wrap" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Nama Pembeli</th>
-                                    <th>Alamat</th>
+                                    <th>Nomor Pesanan</th>
                                     <th>Total</th>
-                                    <th>Status</th>
+                                    <th>Bayar</th>
+                                    <th>Kembali</th>
+                                    <th>Tanggal</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -31,27 +31,20 @@
                                 @php
                                     $total = 0;
                                 @endphp
-                                @foreach ($pesanans as $pesanan)
-                                    @foreach ($pesanan->detail_pesanan as $pesanan)
+                                @foreach ($transaksi as $trs)
+                                    @foreach ($trs->$pesanan->detail_pesanan as $detail)
                                         @php
                                             $total += $detail->barang->harga * $detail->jumlah
                                         @endphp
                                     @endforeach
                                 <tr>
-                                    <td>{{ $pesanan->id }}</td>
-                                    <td>{{ $pesanan->nama_pembeli }}</td>
-                                    <td>{{ $pesanan->alamat }}</td>
+                                    <td>{{ $trs->id_pesanan }}</td>
                                     <td>{{ $total }}</td>
-                                    <td>{{ $pesanan->status }}</td>
+                                    <td>{{ $trs->bayar }}</td>
+                                    <td>{{ $trs->bayar - $total }}</td>
+                                    <td>{{ $trs->created_at }}</td>
                                     <td>
-                                        @if (!\App\Transaksi::where('id_pesanan', $pesanan->id)->exists())
-                                            <a href="{{ url('/pesanan/update', $pesanan->id) }}" class="btn btn-default">Ubah</a>
-                                            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#modelId" onclick="prepare({{ $pesanan->id }})">Hapus</a>
-                                        @else
-                                            <a href="" class="btn btn-info disabled">Ubah</a>
-                                            <a href="" class="btn btn-danger disabled">Hapus</a>
-                                        @endif
-                                        <a href="{{ route('detail.index', $pesanan->id) }}" class="btn btn-info">Detail</a>
+                                       <a href="{{ route('transaksi.invo', $trs->id) }}" target="_blank" class="btn btn-info">Nota</a>
                                     </td>
                                 </tr>
                                 @php

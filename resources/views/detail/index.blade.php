@@ -1,4 +1,6 @@
-<body>
+@extends('template')
+@section('main-content')
+   <body>
     <div class="row">
         <div class="col-12">
             @if (Session::has('detail_succ'))
@@ -6,16 +8,16 @@
                 <strong>{{ Session::get('detail_succ') }}</strong>
             </div>
             @endif
-            <h4>Berisi detail barang yang dipesan oleh <b>{{ $detail_pesanan->pesanan->nama_pelanggan }}</b>di tanggal <b>{{ $detail_pesanan->created_at }}</b></h4>
+            <p class="mb-2">Berisi menu-menu yang dipesan meja nomer <b>{{ $detail_pesan->nama_pembeli }}</b> di tanggal <b>{{ $detail_pesan->created_at }}</b></p>
             <a href="{{ url('/pesanan/index') }}" class="btn btn-info">Kembali ke pesanan</a>
             <div class="card">
                 <div class="card-body">
                     <div>
                         <h4 class="card-title">Detail Pesanan  
-                        @if (\App\Transaksi::where('id_pesanan', $detail_pesanan->id)->exist())
-                            <a href="" class="btn btn-success disabled">Tambah</a>
+                        @if ( \App\Transaksi::where('id_pesanan', $detail_pesan->id)->exists() )
+                            <a href="" class="btn btn-success disabled" style="float: right">Tambah</a>
                         @else
-                            <a href="{{ route('detail.vstore', $detail_pesanans->id) }}" class="btn btn-success mb-4">Tambah</a>
+                            <a href="{{ route('detail.vstore', $detail_pesan->id) }}" class="btn btn-success mb-4" style="float: right">Tambah</a>
                         @endif</h4>
                     </div>
                     <div class="table-responsive">
@@ -35,7 +37,7 @@
                                 @php
                                     $total = 0;
                                 @endphp
-                                @foreach ($detail_pesanans->detail_pesanan as $detail)
+                                @foreach ($detail_pesan->detail_pesanan as $detail)
                                 <tr>
                                     <td>{{ $detail->id }}</td>
                                     <td>{{ $detail->barang->nama }}</td>
@@ -43,17 +45,17 @@
                                     <td>{{ $detail->barang->harga * $detail->jumlah }}</td>
                                     <td>{{ $detail->status }}</td>
                                     <td>
-                                    @if (!\App\Transaksi::where('id_pesanan', $detail_pesanans->id)->exists())
+                                    @if (\App\Transaksi::where('id_pesanan', $detail_pesan->id)->exists())
                                         <a href="" class="btn btn-default disabled">Ubah</a>
                                         <a href="" class="btn btn-danger disabled">Hapus</a>
                                     @else
-                                        <a href="{{ route('detail.vedit', [$detail_pesanans->id, $detail->id]) }}" class="btn btn-default">Ubah</a>
+                                        <a href="{{ route('detail.vedit', [$detail_pesan->id, $detail->id]) }}" class="btn btn-default">Ubah</a>
                                         <a href="" data-target="#modelId" data-toggle="modal" onclick="prepare({{ $detail->id }})" class="btn btn-danger">Hapus</a>
                                     @endif
                                     </td>
                                 </tr>
                                 @php
-                                    $total += $detail->menu->harga * $detail->jumlah
+                                    $total += $detail->barang->harga * $detail->jumlah
                                 @endphp
                                 @endforeach
                             </tbody>
@@ -105,4 +107,5 @@
                 $('#nama').text(data.menu.nama)
             })
         }
-</script>
+</script> 
+@endsection

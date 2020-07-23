@@ -11,8 +11,8 @@ class Pesanan extends Model
         'nama_pembeli', 'alamat'
     ];
 
-    const Proses = 'Dalam Proses';
-    const Selesai = 'Selesai';
+    const PROSES = 'Dalam Proses';
+    const SELESAI = 'Selesai';
 
 
     public function detail_pesanan()

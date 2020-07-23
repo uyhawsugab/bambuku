@@ -17,6 +17,7 @@ class PesananController extends Controller
         $pesanan->alamat = $request->input('alamat');
         $pesanan->save();
 
+        return $pesanan->id;
     }
 
     private function edit(Request $request, $id)

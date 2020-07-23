@@ -64,4 +64,12 @@ Route::group(['middleware' => ['check.signin']], function () {
         Route::get('/detail/json/{id}', 'DetailPesananController@getDataWithJSON');
     });
 
+    Route::group(['prefix' => 'transaksi'], function () {
+        Route::get('/index', 'TransaksiController@index');
+        Route::get('/download-report', 'TransaksiController@exportToExcel');
+        Route::get('/bayar', 'TransaksiController@viewBayar');
+        Route::post('/bayar','TransaksiController@validateBayar');
+        Route::get('/{id}/print', 'TransaksiController@downloadInvo')->name('transaksi.invo');
+    });
+
 });

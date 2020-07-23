@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form action="{{ url('/pesanan/update', $barang->id) }}" method="post">
+                <form action="{{ url('/pesanan/update', $pesanan->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('PUT') }}
                 <div class="form-group">

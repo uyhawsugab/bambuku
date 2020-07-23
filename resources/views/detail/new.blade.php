@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('detail.store') }}" method="post">
+                <form action="{{ route('detail.store', $id_pesanan) }}" method="post">
                 {{ csrf_field() }}
 
                 <div class="form-group">
@@ -35,12 +35,6 @@
                 </div>
                 <input type="submit" value="Tambahkan" class="btn btn-primary">
                 </form>
-                @if (Session::has('detail'))
-                    <form action="{{ route('detail.insert', $id_pesanan) }}" method="post">
-                        {{ csrf_field() }}
-                        <input type="submit" value="Simpan {{ '('. count(Session::get('detail')) .')' }}" class="btn btn-success">
-                    </form>
-                @endif
             </div>
         </div>
     </div>

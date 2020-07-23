@@ -30,7 +30,6 @@
                 </div>
                 <input type="submit" value="Tambahkan" class="btn btn-primary">
                 </form>
-
             </div>
         </div>
     </div>

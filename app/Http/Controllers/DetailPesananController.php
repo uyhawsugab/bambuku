@@ -41,8 +41,8 @@ class DetailPesananController extends Controller
 
     public function index($id_pesanan)
     {
-        $detail_pesanans = Pesanan::where('id', $id_pesanan)->with('detail_pesanan')->first();
-        return view('detail.index', compact('detail_pesanans' , 'id_pesanan'));
+        $detail_pesan = Pesanan::where('id', $id_pesanan)->with('detail_pesanan')->first();
+        return view('detail.index', compact('detail_pesan' , 'id_pesanan'));
     }
 
     public function vStore($id_pesanan)
