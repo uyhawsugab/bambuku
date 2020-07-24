@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h4 class="card-title">Daftar Transaksi  <a href={{ url('pesanan/new') }} class="btn btn-success btn-sm" style="float: right; margin-bottom:10px">Tambah</a></h4>
+                        <h4 class="card-title">Daftar Transaksi  <a href={{ url('transaksi/bayar') }} class="btn btn-success btn-sm" style="float: right; margin-bottom:10px">Tambah</a></h4>
                     </div>
                     <div class="table-responsive">
                         <table id="multi_col_order"
@@ -32,7 +32,7 @@
                                     $total = 0;
                                 @endphp
                                 @foreach ($transaksi as $trs)
-                                    @foreach ($trs->$pesanan->detail_pesanan as $detail)
+                                    @foreach ($trs->pesanan->detail_pesanan as $detail)
                                         @php
                                             $total += $detail->barang->harga * $detail->jumlah
                                         @endphp

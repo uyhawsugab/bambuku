@@ -43,7 +43,7 @@ class TransaksiController extends Controller
     public function viewBayar()
     {
         $pesanan = Pesanan::all();
-        return view('Transaksi.bayar', compact('pesanan'));
+        return view('Transaksi.new', compact('pesanan'));
     }
 
     public function validateBayar(Request $request)
@@ -60,14 +60,17 @@ class TransaksiController extends Controller
         
         else {
             $transaksi_id = $this->bayar($request);
-            return redirect()->route('transaksi.invoice', $transaksi_id);
+            return redirect()->route('transaksi.invo', $transaksi_id);
         }
     }
 
+    
     public function downloadInvo($id)
     {
         $transaksi = Transaksi::where('id', $id)->with('pesanan')->first();
         $invo = PDF::loadView('invoice.invo', compact('transaksi'))->setPaper('a4', 'landscape');
+        ini_set('max_execution_time', 300);
+        ini_set("memory_limit","512M");
         return $invo->stream();
     }
 

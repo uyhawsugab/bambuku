@@ -32,7 +32,7 @@
                                     $total = 0;
                                 @endphp
                                 @foreach ($pesanans as $pesanan)
-                                    @foreach ($pesanan->detail_pesanan as $pesanan)
+                                    @foreach ($pesanan->detail_pesanan as $detail)
                                         @php
                                             $total += $detail->barang->harga * $detail->jumlah
                                         @endphp
